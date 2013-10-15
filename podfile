@@ -1,0 +1,3 @@
+target :RubyTests, :exclusive => true do
+    pod 'Kiwi'
+end
