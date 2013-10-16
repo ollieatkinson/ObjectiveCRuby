@@ -39,9 +39,15 @@
 }
 
 #pragma alias rby_reduce
+
 - (id)rby_inject:(id (^)(id sum, id object))block;
 {
-  id sum;
+  return [self rby_inject:nil block:block];
+}
+
+- (id)rby_inject:(id)start block:(id (^)(id sum, id object))block;
+{
+  id sum = start;
   for (id object in self) {
     sum = sum ? block(sum, object) : object;
   }
