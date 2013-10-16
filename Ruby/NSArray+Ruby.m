@@ -43,7 +43,7 @@
 {
   id sum;
   for (id object in self) {
-    sum = block(sum, object);
+    sum = sum ? block(sum, object) : object;
   }
   return sum;
 }
@@ -169,7 +169,7 @@
 - (NSArray *)rby_reject:(BOOL (^)(id object))block;
 {
   NSParameterAssert(block);
-  
+   
   NSMutableArray *array  = [NSMutableArray array];
   
   for (id object in self) {
