@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSArray+RubyAlias.h"
 
 @interface NSArray (Ruby)
 

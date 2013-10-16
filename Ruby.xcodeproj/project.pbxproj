@@ -16,6 +16,7 @@
 		A74D3431180DE58800757E9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A74D342F180DE58800757E9F /* InfoPlist.strings */; };
 		A74D3433180DE58800757E9F /* RubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3432180DE58800757E9F /* RubyTests.m */; };
 		A74D343E180DE5AA00757E9F /* NSArray+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D343D180DE5AA00757E9F /* NSArray+Ruby.m */; };
+		A74D3441180F108000757E9F /* NSArray+RubyAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3440180F108000757E9F /* NSArray+RubyAlias.m */; };
 		AB00C2F0EAB140C189837EF4 /* libPods-RubyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F3691FE0F84946A3CD2E38 /* libPods-RubyTests.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,8 @@
 		A74D3432180DE58800757E9F /* RubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RubyTests.m; sourceTree = "<group>"; };
 		A74D343C180DE5AA00757E9F /* NSArray+Ruby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Ruby.h"; sourceTree = "<group>"; };
 		A74D343D180DE5AA00757E9F /* NSArray+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ruby.m"; sourceTree = "<group>"; };
+		A74D343F180F108000757E9F /* NSArray+RubyAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+RubyAlias.h"; sourceTree = "<group>"; };
+		A74D3440180F108000757E9F /* NSArray+RubyAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RubyAlias.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 			children = (
 				A74D343C180DE5AA00757E9F /* NSArray+Ruby.h */,
 				A74D343D180DE5AA00757E9F /* NSArray+Ruby.m */,
+				A74D343F180F108000757E9F /* NSArray+RubyAlias.h */,
+				A74D3440180F108000757E9F /* NSArray+RubyAlias.m */,
 			);
 			path = Ruby;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74D343E180DE5AA00757E9F /* NSArray+Ruby.m in Sources */,
+				A74D3441180F108000757E9F /* NSArray+RubyAlias.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

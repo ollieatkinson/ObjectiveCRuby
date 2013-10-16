@@ -10,6 +10,7 @@
 
 @implementation NSArray (Ruby)
 
+#pragma alias rby_collect
 - (NSArray *)rby_map:(id (^)(id object))block;
 {
   NSParameterAssert(block);
@@ -37,6 +38,7 @@
   return groupedDictionary;
 }
 
+#pragma alias rby_reduce
 - (id)rby_inject:(id (^)(id sum, id object))block;
 {
   id sum;
