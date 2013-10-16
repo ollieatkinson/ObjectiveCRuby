@@ -1,21 +1,37 @@
 # Ruby-ish methods for Objective-C
 
-This is a project for personal development to learn more about objective-c and ruby.
+Intro
+---------------------
+This is a project for personal development to learn more about Objective-C and Ruby.
 
----
+Next Improvements
+---------------------
+Finish the Specs for NSArray and continue to pick off classes and methods which are interesting to implement, and methods which might give some value to my every-day coding.
 
-## Current Implementation
+iOS Requirements / ARC Status
+---------------------
+requires iOS 5.0+, and is ARC enabled.
 
-### NSArray
+Tests
+---------------------
+Tests are provided through Kiwi ( https://github.com/allending/Kiwi ), and are largely reproduced from the Ruby
+Reference page ( http://www.ruby-doc.org/core-1.9.3/ ), some methods may be changed slightly
+in how they function, but for the most part the goal is to ape Ruby behaviour.
 
-  + `#map`
-  + `#group_by`
-  + `#inject`
-  + `#min`
-  + `#max`
-  + `#min_by`
-  + `#max_by`
-  + `#none`
-  + `#one`
-  + `#partition`
-  + `#reject`
+---------------------
+
+##NSArray+Ruby
+
+```
+  #map
+  #group_by
+  #inject
+  #min
+  #max
+  #min_by
+  #max_by
+  #none
+  #one
+  #partition
+  #reject
+```
