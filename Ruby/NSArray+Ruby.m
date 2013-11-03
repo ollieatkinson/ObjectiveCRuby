@@ -64,7 +64,7 @@
     
     NSComparisonResult result = block(object, min);
     
-    if (NSOrderedAscending == result) {
+    if (NSOrderedDescending == result) {
       min = object;
     }
   }
@@ -82,7 +82,7 @@
     
     NSComparisonResult result = block(object, max);
     
-    if (NSOrderedDescending == result) {
+    if (NSOrderedAscending == result) {
       max = object;
     }
   }
@@ -100,6 +100,11 @@
   for (id object in self) {
     
     NSNumber *comparable = block(object);
+    
+    if (!minResult) {
+      minResult = comparable;
+      continue;
+    }
     
     if (NSOrderedAscending == [comparable compare:minResult]) {
       min = object;
@@ -119,6 +124,11 @@
   for (id object in self) {
     
     NSNumber *comparable = block(object);
+    
+    if (!maxResult) {
+      maxResult = comparable;
+      continue;
+    }
     
     if (NSOrderedDescending == [comparable compare:maxResult]) {
       max = object;

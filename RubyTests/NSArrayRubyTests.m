@@ -156,4 +156,130 @@ describe(@"NSArray+Ruby#inject", ^{
   
 });
 
+/*
+ a = %w(albatross dog horse)
+ a.min {|a,b| a.length <=> b.length }   #=> "dog"
+ */
+
+describe(@"NSArray+Ruby#min", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the smallest item in the array, \"dog\"", ^{
+    
+    NSString *result = [array rby_min:^NSComparisonResult(NSString *a, NSString *b) {
+      return a.length < b.length;
+    }];
+    
+    [[result should] equal:@"dog"];
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.max {|a,b| a.length <=> b.length }   #=> "albatross"
+ */
+
+describe(@"NSArray+Ruby#max", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the largest item in the array, \"albatross\"", ^{
+    
+    NSString *result = [array rby_max:^NSComparisonResult(NSString *a, NSString *b) {
+      return a.length > b.length;
+    }];
+    
+    [[result should] equal:@"albatross"];
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.min_by {|x| x.length }   #=> "dog"
+ */
+describe(@"NSArray+Ruby#min_by", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the smallest item in the array by length, \"dog\"", ^{
+    
+    NSString *result = [array rby_minBy:^NSNumber *(NSString *object) {
+      return @([object length]);
+    }];
+    
+    [[result should] equal:@"dog"];
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.max_by {|x| x.length }   #=> "albatross"
+ */
+describe(@"NSArray+Ruby#max_by", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the largest item in the array by length, \"albatross\"", ^{
+    
+    NSString *result = [array rby_maxBy:^NSNumber *(NSString *object) {
+      return @([object length]);
+    }];
+    
+    [[result should] equal:@"albatross"];
+    
+  });
+  
+});
+
+/*
+ %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
+ %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
+ [].none?                                          #=> true
+ [nil].none?                                       #=> true
+ [nil,false].none?                                 #=> true
+ */
+
+describe(@"NSArray+Ruby#none", ^{
+  
+  NSArray *array = @[ @"ant", @"bear", @"cat" ];
+  
+  
+  it(@"shouldn't have anything in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 5 letters", ^{
+    
+    BOOL result = [array rby_none:^BOOL(NSString *object) {
+      return object.length == 5;
+    }];
+    
+    [[theValue(result) should] equal:theValue(YES)];
+  });
+ 
+  it(@"It should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
+    
+    BOOL result = [array rby_none:^BOOL(NSString *object) {
+      return object.length >= 4;
+    }];
+    
+    [[theValue(result) should] equal:theValue(NO)];
+  });
+  
+  it(@"an empty array should return YES", ^{
+    
+    BOOL result = [@[ ] rby_none:^BOOL(id object) {
+      return YES;
+    }];
+    
+    [[theValue(result) should] equal:theValue(YES)];
+    
+  });
+  
+  
+});
+
 SPEC_END
