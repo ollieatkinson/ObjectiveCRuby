@@ -15,7 +15,7 @@
 {
   NSParameterAssert(block);
   
-  NSMutableArray *mappedArray = [NSMutableArray array];
+  NSMutableArray *mappedArray = [[NSMutableArray alloc] initWithCapacity:self.count];
   for (id object in self) {
     [mappedArray addObject:block(object)];
   }
@@ -26,7 +26,7 @@
 {
   NSParameterAssert(block);
   
-  NSMutableDictionary *groupedDictionary = [NSMutableDictionary dictionary];
+  NSMutableDictionary *groupedDictionary = [[NSMutableDictionary alloc] init];
   for (id object in self) {
     id key = block(object);
     if (groupedDictionary[key]) {
@@ -39,16 +39,22 @@
 }
 
 #pragma alias rby_reduce
+
 - (id)rby_inject:(id (^)(id sum, id object))block;
 {
-  id sum;
+  return [self rby_inject:nil block:block];
+}
+
+- (id)rby_inject:(id)start block:(id (^)(id sum, id object))block;
+{
+  id sum = start;
   for (id object in self) {
     sum = sum ? block(sum, object) : object;
   }
   return sum;
 }
 
-- (id)rby_min:(NSNumber *(^)(id a, id b))block;
+- (id)rby_min:(NSComparisonResult (^)(id a, id b))block;
 {
   NSParameterAssert(block);
 
@@ -56,9 +62,9 @@
   
   for (id object in self) {
     
-    NSNumber *comparable = block(object, min);
+    NSComparisonResult result = block(object, min);
     
-    if ([comparable integerValue] < 0) {
+    if (NSOrderedDescending == result) {
       min = object;
     }
   }
@@ -66,7 +72,7 @@
   return min;
 }
 
-- (id)rby_max:(NSNumber *(^)(id a, id b))block;
+- (id)rby_max:(NSComparisonResult (^)(id a, id b))block;
 {
   NSParameterAssert(block);
 
@@ -74,9 +80,9 @@
   
   for (id object in self) {
     
-    NSNumber *comparable = block(object, max);
+    NSComparisonResult result = block(object, max);
     
-    if ([comparable integerValue] > 0) {
+    if (NSOrderedAscending == result) {
       max = object;
     }
   }
@@ -94,6 +100,11 @@
   for (id object in self) {
     
     NSNumber *comparable = block(object);
+    
+    if (!minResult) {
+      minResult = comparable;
+      continue;
+    }
     
     if (NSOrderedAscending == [comparable compare:minResult]) {
       min = object;
@@ -114,6 +125,11 @@
     
     NSNumber *comparable = block(object);
     
+    if (!maxResult) {
+      maxResult = comparable;
+      continue;
+    }
+    
     if (NSOrderedDescending == [comparable compare:maxResult]) {
       max = object;
     }
@@ -127,7 +143,9 @@
   NSParameterAssert(block);
 
   for (id object in self) {
-    if (block(object)) return NO;
+    if (block(object)) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -140,7 +158,9 @@
   
   for (id object in self) {
     if (block(object)) {
-      if (foundOne) return NO;
+      if (foundOne) {
+        return NO;
+      }
       foundOne = YES;
     }
   }
@@ -152,8 +172,8 @@
 {
   NSParameterAssert(block);
 
-  NSMutableArray *left  = [NSMutableArray array];
-  NSMutableArray *right = [NSMutableArray array];
+  NSMutableArray *left  = [[NSMutableArray alloc] init];
+  NSMutableArray *right = [[NSMutableArray alloc] init];
   
   for (id object in self) {
     if (block(object)) {
@@ -170,7 +190,7 @@
 {
   NSParameterAssert(block);
    
-  NSMutableArray *array  = [NSMutableArray array];
+  NSMutableArray *array  = [[NSMutableArray alloc] init];
   
   for (id object in self) {
     if (!block(object)) [array addObject:object];

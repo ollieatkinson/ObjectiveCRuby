@@ -17,9 +17,11 @@
 
 - (id)rby_inject:(id (^)(id sum, id object))block;
 
-- (id)rby_min:(NSNumber *(^)(id a, id b))block;
+- (id)rby_inject:(id)start block:(id (^)(id sum, id object))block;
 
-- (id)rby_max:(NSNumber *(^)(id a, id b))block;
+- (id)rby_min:(NSComparisonResult (^)(id a, id b))block;
+
+- (id)rby_max:(NSComparisonResult (^)(id a, id b))block;
 
 - (id)rby_minBy:(NSNumber *(^)(id object))block;
 

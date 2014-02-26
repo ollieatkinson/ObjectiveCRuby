@@ -1,7 +1,10 @@
-#import <Kiwi/Kiwi.h>
+#import <Specta/Specta.h>
+
+#define EXP_SHORTHAND
+#import <Expecta/Expecta.h>
 #import "NSArray+Ruby.h"
 
-SPEC_BEGIN(NSArrayRubySpec)
+SpecBegin(CMNViewController)
 
 /*
  (1..4).collect {|i| i*i }   #=> [1, 4, 9, 16]
@@ -12,9 +15,9 @@ describe(@"NSArray+Ruby#map", ^{
   
   it(@"should return an empty array with an empty input", ^{
     
-    [[[@[ ] rby_map:^id(id object) {
-      return object;
-    }] should] equal:@[ ]];
+    NSArray *array = [@[ ] rby_map:^id(id object) { return object; }];
+    
+    expect(array).to.haveCountOf(0);
     
   });
   
@@ -23,9 +26,10 @@ describe(@"NSArray+Ruby#map", ^{
     NSArray *array = [@[ @1, @2, @3, @4 ] rby_map:^(NSNumber *object) {
       return @([object integerValue] * [object integerValue]);
     }];
-    
-    [[array should] equal:@[ @1, @4, @9, @16 ]];
-    
+
+    expect(array).to.haveCountOf(4);
+    expect(array).to.equal((@[ @1, @4, @9, @16 ]));
+      
   });
   
   it(@"should add exclaimation marks to each string", ^{
@@ -34,10 +38,10 @@ describe(@"NSArray+Ruby#map", ^{
       return @"cat";
     }];
     
-    [[array should] equal:@[ @"cat", @"cat", @"cat", @"cat" ]];
+    expect(array).to.equal((@[ @"cat", @"cat", @"cat", @"cat" ]));
     
   });
-  
+
   it(@"should behave the same as NSArray+Ruby#collect", ^{
     
     id(^block)(NSString *object) = ^(NSString *object) {
@@ -47,7 +51,7 @@ describe(@"NSArray+Ruby#map", ^{
     NSArray *map     = [@[ @"a", @"b", @"c", @"d" ] rby_map:block];
     NSArray *collect = [@[ @"a", @"b", @"c", @"d" ] rby_collect:block];
     
-    [[map should] equal:collect];
+    expect(map).to.equal(collect);
     
   });
   
@@ -67,7 +71,7 @@ describe(@"NSArray+Ruby#group_by", ^{
       return object;
     }];
     
-    [[result should] equal:@{ }];
+    expect(result).to.haveCountOf(0);
     
   });
   
@@ -77,11 +81,11 @@ describe(@"NSArray+Ruby#group_by", ^{
       return @([object integerValue] % 3);
     }];
     
-    [[result should] equal:@{
-                             @0 : @[ @3, @6 ],
-                             @1 : @[ @1, @4 ],
-                             @2 : @[ @2, @5 ],
-                             }];
+    expect(result).to.equal((@{
+                               @0 : @[ @3, @6 ],
+                               @1 : @[ @1, @4 ],
+                               @2 : @[ @2, @5 ],
+                               }));
     
   });
   
@@ -115,7 +119,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return @([sum integerValue] + [object integerValue]);
     }];
     
-    [[result should] equal:@(45)];
+    expect(result).to.equal(45);
     
   });
   
@@ -125,7 +129,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return @([sum integerValue] * [object integerValue]);
     }];
     
-    [[result should] equal:@(151200)];
+    expect(result).to.equal(151200);
     
   });
   
@@ -137,7 +141,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return memo.length > word.length ? memo : word;
     }];
     
-    [[longestWord should] equal:@"sheep"];
+    expect(longestWord).to.equal(@"sheep");
     
   });
   
@@ -150,10 +154,136 @@ describe(@"NSArray+Ruby#inject", ^{
     NSNumber *inject = [@[ @5, @6, @7, @8, @9, @10 ] rby_inject:block];
     NSNumber *reduce = [@[ @5, @6, @7, @8, @9, @10 ] rby_reduce:block];
     
-    [[inject should] equal:reduce];
+    expect(inject).to.equal(reduce);
     
   });
   
 });
 
-SPEC_END
+/*
+ a = %w(albatross dog horse)
+ a.min {|a,b| a.length <=> b.length }   #=> "dog"
+ */
+
+describe(@"NSArray+Ruby#min", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the smallest item in the array, \"dog\"", ^{
+    
+    NSString *result = [array rby_min:^NSComparisonResult(NSString *a, NSString *b) {
+      return a.length < b.length;
+    }];
+    
+    expect(result).to.equal(@"dog");
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.max {|a,b| a.length <=> b.length }   #=> "albatross"
+ */
+
+describe(@"NSArray+Ruby#max", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the largest item in the array, \"albatross\"", ^{
+    
+    NSString *result = [array rby_max:^NSComparisonResult(NSString *a, NSString *b) {
+      return a.length > b.length;
+    }];
+    
+    expect(result).to.equal(@"albatross");
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.min_by {|x| x.length }   #=> "dog"
+ */
+describe(@"NSArray+Ruby#min_by", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the smallest item in the array by length, \"dog\"", ^{
+    
+    NSString *result = [array rby_minBy:^NSNumber *(NSString *object) {
+      return @([object length]);
+    }];
+    
+    expect(result).to.equal(@"dog");
+    
+  });
+  
+});
+
+/*
+ a = %w(albatross dog horse)
+ a.max_by {|x| x.length }   #=> "albatross"
+ */
+describe(@"NSArray+Ruby#max_by", ^{
+  
+  NSArray *array = @[ @"albatross", @"horse", @"dog" ];
+  
+  it(@"should be return the largest item in the array by length, \"albatross\"", ^{
+    
+    NSString *result = [array rby_maxBy:^NSNumber *(NSString *object) {
+      return @([object length]);
+    }];
+    
+    expect(result).to.equal(@"albatross");
+    
+  });
+  
+});
+
+/*
+ %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
+ %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
+ [].none?                                          #=> true
+ */
+
+describe(@"NSArray+Ruby#none", ^{
+  
+  NSArray *array = @[ @"ant", @"bear", @"cat" ];
+  
+  
+  it(@"shouldn't have anything in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 5 letters", ^{
+    
+    BOOL result = [array rby_none:^BOOL(NSString *object) {
+      return object.length == 5;
+    }];
+    
+    expect(result).to.equal(YES);
+    
+  });
+ 
+  it(@"should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
+    
+    BOOL result = [array rby_none:^BOOL(NSString *object) {
+      return object.length >= 4;
+    }];
+    
+    expect(result).to.equal(NO);
+    
+  });
+  
+  it(@"an empty array should return YES", ^{
+    
+    BOOL result = [@[ ] rby_none:^BOOL(id object) {
+      return YES;
+    }];
+    
+    expect(result).to.equal(YES);
+    
+  });
+  
+  
+});
+
+SpecEnd

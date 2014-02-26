@@ -14,4 +14,6 @@
 
 - (id)rby_reduce:(id (^)(id sum, id object))block;
 
+- (id)rby_reduce:(id)start block:(id (^)(id sum, id object))block;
+
 @end

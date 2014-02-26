@@ -21,4 +21,9 @@
   return [self rby_inject:block];
 }
 
+- (id)rby_reduce:(id)start block:(id (^)(id sum, id object))block;
+{
+  return [self rby_inject:start block:block];
+}
+
 @end
