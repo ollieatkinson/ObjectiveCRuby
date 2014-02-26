@@ -14,7 +14,7 @@ requires iOS 5.0+, and is ARC enabled.
 
 Tests
 ---------------------
-Tests are provided through Kiwi ( https://github.com/allending/Kiwi ), and are largely reproduced from the Ruby
+Tests are provided through Expecta ( https://github.com/specta/expecta ), and are largely reproduced from the Ruby
 Reference page ( http://www.ruby-doc.org/core-1.9.3/ ), some methods may be changed slightly
 in how they function, but for the most part the goal is to ape Ruby behaviour.
 

@@ -4,7 +4,7 @@
 #import <Expecta/Expecta.h>
 #import "NSArray+Ruby.h"
 
-SpecBegin(CMNViewController)
+SpecBegin(NSArrayRuby)
 
 /*
  (1..4).collect {|i| i*i }   #=> [1, 4, 9, 16]
