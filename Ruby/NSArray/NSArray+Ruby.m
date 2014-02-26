@@ -11,7 +11,7 @@
 @implementation NSArray (Ruby)
 
 #pragma alias rby_collect
-- (NSArray *)rby_map:(id (^)(id object))block;
+- (instancetype)rby_map:(id (^)(id object))block;
 {
   NSParameterAssert(block);
   
@@ -186,7 +186,7 @@
   return @[ left, right ];
 }
 
-- (NSArray *)rby_reject:(BOOL (^)(id object))block;
+- (instancetype)rby_reject:(BOOL (^)(id object))block;
 {
   NSParameterAssert(block);
    

@@ -10,7 +10,7 @@
 
 @interface NSArray (RubyAlias)
 
-- (NSArray *)rby_collect:(id (^)(id object))block;
+- (instancetype)rby_collect:(id (^)(id object))block;
 
 - (id)rby_reduce:(id (^)(id sum, id object))block;
 

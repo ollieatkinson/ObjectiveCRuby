@@ -11,7 +11,7 @@
 
 @implementation NSArray (RubyAlias)
 
-- (NSArray *)rby_collect:(id (^)(id object))block;
+- (instancetype)rby_collect:(id (^)(id object))block;
 {
   return [self rby_map:block];
 }

@@ -9,15 +9,17 @@
 /* Begin PBXBuildFile section */
 		2093D7F6998445AD82EE9988 /* libPods-RubyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 116C5F843CC74C11A237E4AB /* libPods-RubyTests.a */; };
 		A74D3459180F1CA300757E9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74D3458180F1CA300757E9F /* Foundation.framework */; };
-		A74D3482180F1CC200757E9F /* NSArray+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3480180F1CC200757E9F /* NSArray+Ruby.m */; };
-		A74D3483180F1CC200757E9F /* NSArray+RubyAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3481180F1CC200757E9F /* NSArray+RubyAlias.m */; };
 		A74D34ED180F337A00757E9F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74D34EC180F337A00757E9F /* XCTest.framework */; };
 		A74D34EE180F337A00757E9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74D3458180F1CA300757E9F /* Foundation.framework */; };
 		A74D34EF180F337A00757E9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74D3469180F1CA300757E9F /* UIKit.framework */; };
 		A74D34F5180F337A00757E9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A74D34F3180F337A00757E9F /* InfoPlist.strings */; };
 		A74D3501180F35CF00757E9F /* NSArrayRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3474180F1CA300757E9F /* NSArrayRubyTests.m */; };
-		A74D3503180F373D00757E9F /* NSArray+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3480180F1CC200757E9F /* NSArray+Ruby.m */; };
-		A74D3504180F374000757E9F /* NSArray+RubyAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D3481180F1CC200757E9F /* NSArray+RubyAlias.m */; };
+		A789BF6C18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF6918BE9CFB008E2704 /* NSArray+Ruby.m */; };
+		A789BF6D18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF6918BE9CFB008E2704 /* NSArray+Ruby.m */; };
+		A789BF6E18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF6B18BE9CFB008E2704 /* NSArray+RubyAlias.m */; };
+		A789BF6F18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF6B18BE9CFB008E2704 /* NSArray+RubyAlias.m */; };
+		A789BF7318BE9D23008E2704 /* NSNumber+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF7218BE9D23008E2704 /* NSNumber+Ruby.m */; };
+		A789BF7418BE9D23008E2704 /* NSNumber+Ruby.m in Sources */ = {isa = PBXBuildFile; fileRef = A789BF7218BE9D23008E2704 /* NSNumber+Ruby.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,15 +51,17 @@
 		A74D345C180F1CA300757E9F /* Ruby-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ruby-Prefix.pch"; sourceTree = "<group>"; };
 		A74D3469180F1CA300757E9F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A74D3474180F1CA300757E9F /* NSArrayRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NSArrayRubyTests.m; path = RubyTests/NSArrayRubyTests.m; sourceTree = SOURCE_ROOT; };
-		A74D347E180F1CC200757E9F /* NSArray+Ruby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Ruby.h"; sourceTree = "<group>"; };
-		A74D347F180F1CC200757E9F /* NSArray+RubyAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+RubyAlias.h"; sourceTree = "<group>"; };
-		A74D3480180F1CC200757E9F /* NSArray+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ruby.m"; sourceTree = "<group>"; };
-		A74D3481180F1CC200757E9F /* NSArray+RubyAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RubyAlias.m"; sourceTree = "<group>"; };
 		A74D34EB180F337A00757E9F /* RubyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74D34EC180F337A00757E9F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A74D34F2180F337A00757E9F /* RubyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RubyTests-Info.plist"; sourceTree = "<group>"; };
 		A74D34F4180F337A00757E9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A74D34F8180F337A00757E9F /* RubyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RubyTests-Prefix.pch"; sourceTree = "<group>"; };
+		A789BF6818BE9CFB008E2704 /* NSArray+Ruby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Ruby.h"; sourceTree = "<group>"; };
+		A789BF6918BE9CFB008E2704 /* NSArray+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ruby.m"; sourceTree = "<group>"; };
+		A789BF6A18BE9CFB008E2704 /* NSArray+RubyAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+RubyAlias.h"; sourceTree = "<group>"; };
+		A789BF6B18BE9CFB008E2704 /* NSArray+RubyAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RubyAlias.m"; sourceTree = "<group>"; };
+		A789BF7118BE9D23008E2704 /* NSNumber+Ruby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+Ruby.h"; path = "NSNumber/NSNumber+Ruby.h"; sourceTree = "<group>"; };
+		A789BF7218BE9D23008E2704 /* NSNumber+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+Ruby.m"; path = "NSNumber/NSNumber+Ruby.m"; sourceTree = "<group>"; };
 		F776E328B49348CBAE88B823 /* Pods-RubyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyTests.xcconfig"; path = "Pods/Pods-RubyTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,10 +122,8 @@
 		A74D345A180F1CA300757E9F /* Ruby */ = {
 			isa = PBXGroup;
 			children = (
-				A74D347E180F1CC200757E9F /* NSArray+Ruby.h */,
-				A74D347F180F1CC200757E9F /* NSArray+RubyAlias.h */,
-				A74D3480180F1CC200757E9F /* NSArray+Ruby.m */,
-				A74D3481180F1CC200757E9F /* NSArray+RubyAlias.m */,
+				A789BF6718BE9CFB008E2704 /* NSArray */,
+				A789BF7018BE9CFF008E2704 /* NSNumber */,
 				A74D345B180F1CA300757E9F /* Supporting Files */,
 			);
 			path = Ruby;
@@ -152,6 +154,26 @@
 				A74D34F8180F337A00757E9F /* RubyTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A789BF6718BE9CFB008E2704 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				A789BF6818BE9CFB008E2704 /* NSArray+Ruby.h */,
+				A789BF6918BE9CFB008E2704 /* NSArray+Ruby.m */,
+				A789BF6A18BE9CFB008E2704 /* NSArray+RubyAlias.h */,
+				A789BF6B18BE9CFB008E2704 /* NSArray+RubyAlias.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		A789BF7018BE9CFF008E2704 /* NSNumber */ = {
+			isa = PBXGroup;
+			children = (
+				A789BF7118BE9D23008E2704 /* NSNumber+Ruby.h */,
+				A789BF7218BE9D23008E2704 /* NSNumber+Ruby.m */,
+			);
+			name = NSNumber;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,8 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A74D3482180F1CC200757E9F /* NSArray+Ruby.m in Sources */,
-				A74D3483180F1CC200757E9F /* NSArray+RubyAlias.m in Sources */,
+				A789BF7318BE9D23008E2704 /* NSNumber+Ruby.m in Sources */,
+				A789BF6C18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */,
+				A789BF6E18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,8 +307,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A74D3504180F374000757E9F /* NSArray+RubyAlias.m in Sources */,
-				A74D3503180F373D00757E9F /* NSArray+Ruby.m in Sources */,
+				A789BF6F18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */,
+				A789BF7418BE9D23008E2704 /* NSNumber+Ruby.m in Sources */,
+				A789BF6D18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */,
 				A74D3501180F35CF00757E9F /* NSArrayRubyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
