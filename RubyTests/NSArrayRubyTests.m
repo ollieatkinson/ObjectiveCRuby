@@ -242,8 +242,6 @@ describe(@"NSArray+Ruby#max_by", ^{
  %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
  %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
  [].none?                                          #=> true
- [nil].none?                                       #=> true
- [nil,false].none?                                 #=> true
  */
 
 describe(@"NSArray+Ruby#none", ^{
@@ -260,7 +258,7 @@ describe(@"NSArray+Ruby#none", ^{
     [[theValue(result) should] equal:theValue(YES)];
   });
  
-  it(@"It should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
+  it(@"should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
     
     BOOL result = [array rby_none:^BOOL(NSString *object) {
       return object.length >= 4;
