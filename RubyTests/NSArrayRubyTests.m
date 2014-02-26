@@ -1,7 +1,10 @@
-#import <Kiwi/Kiwi.h>
+#import <Specta/Specta.h>
+
+#define EXP_SHORTHAND
+#import <Expecta/Expecta.h>
 #import "NSArray+Ruby.h"
 
-SPEC_BEGIN(NSArrayRubySpec)
+SpecBegin(CMNViewController)
 
 /*
  (1..4).collect {|i| i*i }   #=> [1, 4, 9, 16]
@@ -12,9 +15,9 @@ describe(@"NSArray+Ruby#map", ^{
   
   it(@"should return an empty array with an empty input", ^{
     
-    [[[@[ ] rby_map:^id(id object) {
-      return object;
-    }] should] equal:@[ ]];
+    NSArray *array = [@[ ] rby_map:^id(id object) { return object; }];
+    
+    expect(array).to.haveCountOf(0);
     
   });
   
@@ -23,9 +26,10 @@ describe(@"NSArray+Ruby#map", ^{
     NSArray *array = [@[ @1, @2, @3, @4 ] rby_map:^(NSNumber *object) {
       return @([object integerValue] * [object integerValue]);
     }];
-    
-    [[array should] equal:@[ @1, @4, @9, @16 ]];
-    
+
+    expect(array).to.haveCountOf(4);
+    expect(array).to.equal((@[ @1, @4, @9, @16 ]));
+      
   });
   
   it(@"should add exclaimation marks to each string", ^{
@@ -34,10 +38,10 @@ describe(@"NSArray+Ruby#map", ^{
       return @"cat";
     }];
     
-    [[array should] equal:@[ @"cat", @"cat", @"cat", @"cat" ]];
+    expect(array).to.equal((@[ @"cat", @"cat", @"cat", @"cat" ]));
     
   });
-  
+
   it(@"should behave the same as NSArray+Ruby#collect", ^{
     
     id(^block)(NSString *object) = ^(NSString *object) {
@@ -47,7 +51,7 @@ describe(@"NSArray+Ruby#map", ^{
     NSArray *map     = [@[ @"a", @"b", @"c", @"d" ] rby_map:block];
     NSArray *collect = [@[ @"a", @"b", @"c", @"d" ] rby_collect:block];
     
-    [[map should] equal:collect];
+    expect(map).to.equal(collect);
     
   });
   
@@ -67,7 +71,7 @@ describe(@"NSArray+Ruby#group_by", ^{
       return object;
     }];
     
-    [[result should] equal:@{ }];
+    expect(result).to.haveCountOf(0);
     
   });
   
@@ -77,11 +81,11 @@ describe(@"NSArray+Ruby#group_by", ^{
       return @([object integerValue] % 3);
     }];
     
-    [[result should] equal:@{
-                             @0 : @[ @3, @6 ],
-                             @1 : @[ @1, @4 ],
-                             @2 : @[ @2, @5 ],
-                             }];
+    expect(result).to.equal((@{
+                               @0 : @[ @3, @6 ],
+                               @1 : @[ @1, @4 ],
+                               @2 : @[ @2, @5 ],
+                               }));
     
   });
   
@@ -115,7 +119,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return @([sum integerValue] + [object integerValue]);
     }];
     
-    [[result should] equal:@(45)];
+    expect(result).to.equal(45);
     
   });
   
@@ -125,7 +129,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return @([sum integerValue] * [object integerValue]);
     }];
     
-    [[result should] equal:@(151200)];
+    expect(result).to.equal(151200);
     
   });
   
@@ -137,7 +141,7 @@ describe(@"NSArray+Ruby#inject", ^{
       return memo.length > word.length ? memo : word;
     }];
     
-    [[longestWord should] equal:@"sheep"];
+    expect(longestWord).to.equal(@"sheep");
     
   });
   
@@ -150,7 +154,7 @@ describe(@"NSArray+Ruby#inject", ^{
     NSNumber *inject = [@[ @5, @6, @7, @8, @9, @10 ] rby_inject:block];
     NSNumber *reduce = [@[ @5, @6, @7, @8, @9, @10 ] rby_reduce:block];
     
-    [[inject should] equal:reduce];
+    expect(inject).to.equal(reduce);
     
   });
   
@@ -171,7 +175,7 @@ describe(@"NSArray+Ruby#min", ^{
       return a.length < b.length;
     }];
     
-    [[result should] equal:@"dog"];
+    expect(result).to.equal(@"dog");
     
   });
   
@@ -192,7 +196,7 @@ describe(@"NSArray+Ruby#max", ^{
       return a.length > b.length;
     }];
     
-    [[result should] equal:@"albatross"];
+    expect(result).to.equal(@"albatross");
     
   });
   
@@ -212,7 +216,7 @@ describe(@"NSArray+Ruby#min_by", ^{
       return @([object length]);
     }];
     
-    [[result should] equal:@"dog"];
+    expect(result).to.equal(@"dog");
     
   });
   
@@ -232,7 +236,7 @@ describe(@"NSArray+Ruby#max_by", ^{
       return @([object length]);
     }];
     
-    [[result should] equal:@"albatross"];
+    expect(result).to.equal(@"albatross");
     
   });
   
@@ -242,8 +246,6 @@ describe(@"NSArray+Ruby#max_by", ^{
  %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
  %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
  [].none?                                          #=> true
- [nil].none?                                       #=> true
- [nil,false].none?                                 #=> true
  */
 
 describe(@"NSArray+Ruby#none", ^{
@@ -257,16 +259,18 @@ describe(@"NSArray+Ruby#none", ^{
       return object.length == 5;
     }];
     
-    [[theValue(result) should] equal:theValue(YES)];
+    expect(result).to.equal(YES);
+    
   });
  
-  it(@"It should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
+  it(@"should have something in the array @[ @\"ant\", @\"bear\", @\"cat\" ] with 4 or more letters", ^{
     
     BOOL result = [array rby_none:^BOOL(NSString *object) {
       return object.length >= 4;
     }];
     
-    [[theValue(result) should] equal:theValue(NO)];
+    expect(result).to.equal(NO);
+    
   });
   
   it(@"an empty array should return YES", ^{
@@ -275,11 +279,11 @@ describe(@"NSArray+Ruby#none", ^{
       return YES;
     }];
     
-    [[theValue(result) should] equal:theValue(YES)];
+    expect(result).to.equal(YES);
     
   });
   
   
 });
 
-SPEC_END
+SpecEnd

@@ -53,7 +53,7 @@
 		A74D347F180F1CC200757E9F /* NSArray+RubyAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+RubyAlias.h"; sourceTree = "<group>"; };
 		A74D3480180F1CC200757E9F /* NSArray+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ruby.m"; sourceTree = "<group>"; };
 		A74D3481180F1CC200757E9F /* NSArray+RubyAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+RubyAlias.m"; sourceTree = "<group>"; };
-		A74D34EB180F337A00757E9F /* RubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A74D34EB180F337A00757E9F /* RubyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74D34EC180F337A00757E9F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A74D34F2180F337A00757E9F /* RubyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RubyTests-Info.plist"; sourceTree = "<group>"; };
 		A74D34F4180F337A00757E9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				A74D3455180F1CA300757E9F /* libRuby.a */,
-				A74D34EB180F337A00757E9F /* RubyTests.xctest */,
+				A74D34EB180F337A00757E9F /* RubyTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 			);
 			name = RubyTests;
 			productName = RubyTests;
-			productReference = A74D34EB180F337A00757E9F /* RubyTests.xctest */;
+			productReference = A74D34EB180F337A00757E9F /* RubyTests.octest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -437,7 +437,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -458,7 +458,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
