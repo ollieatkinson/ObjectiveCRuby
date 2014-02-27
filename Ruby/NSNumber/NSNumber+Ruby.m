@@ -25,14 +25,22 @@
   return @(floor([self doubleValue]));
 }
 
-- (instancetype)rby_divide:(NSNumber *)number;
-{
-  return @((NSInteger)([self integerValue] / [number integerValue]));
-}
-
-- (instancetype)rby_imaginary;
++ (instancetype)rby_imaginary;
 {
   return @0;
+}
+
+- (void)rby_times:(void (^)(NSInteger idx))block;
+{
+  NSInteger number = [self integerValue];
+  
+  if (number < 1) {
+    return;
+  }
+  
+  for (NSInteger idx = 0; idx < number; idx++) {
+    block(idx);
+  }
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "NSArray+Ruby.h"
+#import "NSNumber+Ruby.h"
 
 @implementation NSArray (Ruby)
 
@@ -197,6 +198,190 @@
   }
   
   return array;
+}
+
+- (instancetype)rby_plus:(NSArray *)array;
+{
+  return [self arrayByAddingObjectsFromArray:array];
+}
+
+- (instancetype)rby_times:(NSArray *)array;
+{
+  if (self.count != array.count) {
+    [NSException raise:NSInvalidArgumentException
+                format:NSLocalizedString(@"Array must have the same number of entities", @"exception message")];
+  }
+  
+  NSMutableArray *multipliedArray = [@[] mutableCopy];
+  
+  [self enumerateObjectsUsingBlock:^(NSNumber *number, NSUInteger idx, BOOL *stop) {
+    
+    if (![number isKindOfClass:[NSNumber class]] || ![array[idx] isKindOfClass:[NSNumber class]]) {
+      NSException *exception =
+      [NSException exceptionWithName:NSInternalInconsistencyException
+                              reason:@"Object is not of type NSNumber"
+                            userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"No implicit conversion into Number", @"exception message")}];
+      
+      [exception raise];
+    }
+    
+    [multipliedArray addObject:@([number doubleValue] * [array[idx] doubleValue])];
+  }];
+  
+  return [multipliedArray copy];
+}
+
+- (instancetype)rby_union:(NSArray *)array;
+{
+  NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:self];
+  [set unionOrderedSet:[NSOrderedSet orderedSetWithArray:array]];
+  return [set array];
+}
+
+- (instancetype)rby_intersect:(NSArray *)array;
+{
+  NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:self];
+  [set intersectsOrderedSet:[NSOrderedSet orderedSetWithArray:array]];
+  return [set array];
+}
+
+- (instancetype)rby_compact;
+{
+  return [self rby_reject:^BOOL(id object) {
+    return [object isKindOfClass:[NSNull class]];
+  }];
+}
+
+- (void)rby_cycle:(BOOL (^)(id object))block;
+{
+  [self rby_cycle:nil block:block];
+}
+
+- (void)rby_cycle:(NSNumber *)times block:(BOOL (^)(id object))block;
+{
+  void (^loopBlock)(BOOL *stop) = ^(BOOL *stop) {
+    
+    for (id object in self) {
+      *stop = block(object);
+      
+      if (*stop) {
+        return;
+      }
+    }
+    
+  };
+  
+  __block BOOL stop = NO;
+  
+  if (times) {
+    
+    NSInteger timesInteger = [times integerValue];
+    
+    if (timesInteger < 1) {
+      return;
+    }
+    
+    [times rby_times:^(NSInteger idx) {
+      
+      loopBlock(&stop);
+      
+      if (stop) {
+        return;
+      }
+      
+    }];
+  
+  } else {
+    
+    while (true) {
+      
+      loopBlock(&stop);
+      
+      if (stop) {
+        goto quit;
+      }
+      
+    }
+  }
+  
+quit:
+  return;
+  
+}
+
+- (instancetype)rby_transpose:(NSArray *)array;
+{
+  NSMutableArray *mutableArray = [@[] mutableCopy];
+  NSNumber *max                = nil;
+  
+  for (id object in self) {
+    
+    if (![object isKindOfClass:[NSArray class]]) {
+      NSException *exception =
+      [NSException exceptionWithName:NSInternalInconsistencyException
+                              reason:@"Object is not of type NSArray"
+                            userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"Object is not of type NSArray", @"exception message")}];
+      
+      [exception raise];
+    }
+    
+    max = max ?: @([object count]);
+    
+    if ([object count] != [max integerValue]) {
+      
+      NSException *exception =
+      [NSException exceptionWithName:NSInternalInconsistencyException
+                              reason:@"All arrays must be same length"
+                            userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"All arrays must be same length", @"exception message")}];
+      
+      [exception raise];
+    }
+    
+    [max rby_times:^(NSInteger idx) {
+      NSMutableArray *entry = mutableArray[idx] ?: [@[] mutableCopy];
+      [entry addObject:object[idx]];
+    }];
+    
+  }
+  
+  return [mutableArray copy];
+}
+
+- (instancetype)rby_unique;
+{
+  return [[NSMutableOrderedSet orderedSetWithArray:self] array];
+}
+
+- (instancetype)rby_rotate:(NSInteger)times;
+{
+  NSArray *array = self;
+  for (NSInteger idx = 0; idx != times; times < 0 ? idx-- : idx++) {
+    array = [array reverseObjectEnumerator].allObjects;
+  }
+  return array;
+}
+
+- (instancetype)rby_push:(id)object;
+{
+  if ([object isKindOfClass:[NSArray class]]) {
+    return [self arrayByAddingObjectsFromArray:object];
+  } else {
+    return [self arrayByAddingObject:object];
+  }
+}
+
+- (instancetype)rby_pop;
+{
+  return [self rby_pop:1];
+}
+
+- (instancetype)rby_pop:(NSInteger)number;
+{
+  if (number >= [self count]) {
+    return @[];
+  }
+  
+  return [self subarrayWithRange:NSMakeRange(0, number)];
 }
 
 @end

@@ -26,13 +26,13 @@
 - (instancetype)rby_floor;
 
 /*
- Uses / to perform division, then converts the result to an integer.
- */
-- (instancetype)rby_divide:(NSNumber *)number;
-
-/*
  Returns zero.
  */
-- (instancetype)rby_imaginary;
++ (instancetype)rby_imaginary;
+
+/*
+ Execute the block self times
+ */
+- (void)rby_times:(void (^)(NSInteger idx))block;
 
 @end

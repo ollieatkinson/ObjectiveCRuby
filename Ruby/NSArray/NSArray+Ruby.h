@@ -56,13 +56,11 @@
 
 - (instancetype)rby_intersect:(NSArray *)array;
 
-- (instancetype)rby_slice:(NSArray *)array;
-
 - (instancetype)rby_compact;
 
-- (instancetype)rby_cycle:(BOOL (^)(id object))block;
+- (void)rby_cycle:(BOOL (^)(id object))block;
 
-- (instancetype)rby_cycle:(NSInteger)times block:(BOOL (^)(id object))block;
+- (void)rby_cycle:(NSNumber *)times block:(BOOL (^)(id object))block;
 
 - (instancetype)rby_transpose:(NSArray *)array;
 
