@@ -286,4 +286,67 @@ describe(@"NSArray+Ruby#none", ^{
   
 });
 
+/*
+ a = ["a", "b", "c"]
+ a.cycle { |x| puts x }     # print, a, b, c, a, b, c,.. forever.
+ a.cycle(2) { |x| puts x }  # print, a, b, c, a, b, c.
+ */
+
+describe(@"NSArray+Ruby#cycle", ^{
+  
+  NSArray *array = @[ @"a", @"b", @"c" ];
+  
+  
+  it (@"should cycle two times when passed 2", ^{
+    
+    __block NSInteger count = 0;
+    [array rby_cycle:@2
+               block:^BOOL(id object) {
+                 count++;
+                 return NO;
+               }];
+    
+    expect(count).to.equal(6);
+    
+  });
+  
+  it (@"should cycle zero times when passed 0", ^{
+    
+    __block NSInteger count = 0;
+    [array rby_cycle:@0
+               block:^BOOL(id object) {
+                 count++;
+                 return NO;
+               }];
+    
+    expect(count).to.equal(0);
+    
+  });
+  
+  it (@"should cycle zero times when passed -1", ^{
+    
+    __block NSInteger count = 0;
+    [array rby_cycle:@(-1)
+               block:^BOOL(id object) {
+                 count++;
+                 return NO;
+               }];
+    
+    expect(count).to.equal(0);
+    
+  });
+  
+  it(@"should cycle forever until YES is returned", ^{
+    
+    __block NSInteger count = 0;
+    [array rby_cycle:^BOOL(id object) {
+      return ++count == 100;
+    }];
+    
+    expect(count).to.equal(100);
+    
+  });
+  
+});
+
 SpecEnd
