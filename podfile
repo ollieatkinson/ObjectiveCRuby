@@ -1,5 +1,5 @@
 target :RubyTests, :exclusive => true do
   pod 'Expecta',   '~> 0.2.3'
-  pod 'Specta',    '~> 0.1.11'
+  pod 'Specta',    '~> 0.2.0'
   pod 'OCMockito', '~> 1.0.0'
 end
