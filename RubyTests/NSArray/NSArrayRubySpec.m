@@ -301,9 +301,8 @@ describe(@"NSArray+Ruby#cycle", ^{
     
     __block NSInteger count = 0;
     [array rby_cycle:@2
-               block:^BOOL(id object) {
+               block:^(id object, BOOL *stop) {
                  count++;
-                 return NO;
                }];
     
     expect(count).to.equal(6);
@@ -314,9 +313,8 @@ describe(@"NSArray+Ruby#cycle", ^{
     
     __block NSInteger count = 0;
     [array rby_cycle:@0
-               block:^BOOL(id object) {
+               block:^(id object, BOOL *stop) {
                  count++;
-                 return NO;
                }];
     
     expect(count).to.equal(0);
@@ -327,9 +325,8 @@ describe(@"NSArray+Ruby#cycle", ^{
     
     __block NSInteger count = 0;
     [array rby_cycle:@(-1)
-               block:^BOOL(id object) {
+               block:^(id object, BOOL *stop) {
                  count++;
-                 return NO;
                }];
     
     expect(count).to.equal(0);
@@ -339,8 +336,8 @@ describe(@"NSArray+Ruby#cycle", ^{
   it(@"should cycle forever until YES is returned", ^{
     
     __block NSInteger count = 0;
-    [array rby_cycle:^BOOL(id object) {
-      return ++count == 100;
+    [array rby_cycle:^(id object, BOOL *stop) {
+      *stop = ++count == 100;
     }];
     
     expect(count).to.equal(100);

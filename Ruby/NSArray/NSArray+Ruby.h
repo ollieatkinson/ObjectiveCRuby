@@ -58,9 +58,9 @@
 
 - (instancetype)rby_compact;
 
-- (void)rby_cycle:(BOOL (^)(id object))block;
+- (void)rby_cycle:(void (^)(id object, BOOL *stop))block;
 
-- (void)rby_cycle:(NSNumber *)times block:(BOOL (^)(id object))block;
+- (void)rby_cycle:(NSNumber *)times block:(void (^)(id object, BOOL *stop))block;
 
 - (instancetype)rby_transpose:(NSArray *)array;
 

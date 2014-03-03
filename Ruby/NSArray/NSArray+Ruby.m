@@ -252,61 +252,32 @@
   }];
 }
 
-- (void)rby_cycle:(BOOL (^)(id object))block;
+- (void)rby_cycle:(void (^)(id object, BOOL *stop))block;
 {
   [self rby_cycle:nil block:block];
 }
 
-- (void)rby_cycle:(NSNumber *)times block:(BOOL (^)(id object))block;
+- (void)rby_cycle:(NSNumber *)times block:(void (^)(id object, BOOL *stop))block;
 {
-  void (^loopBlock)(BOOL *stop) = ^(BOOL *stop) {
-    
-    for (id object in self) {
-      *stop = block(object);
-      
-      if (*stop) {
-        return;
-      }
-    }
-    
-  };
+  long long count = [times longLongValue];
   
-  __block BOOL stop = NO;
-  
-  if (times) {
-    
-    NSInteger timesInteger = [times integerValue];
-    
-    if (timesInteger < 1) {
-      return;
-    }
-    
-    [times rby_times:^(NSInteger idx) {
-      
-      loopBlock(&stop);
-      
-      if (stop) {
-        return;
-      }
-      
-    }];
-  
-  } else {
-    
-    while (true) {
-      
-      loopBlock(&stop);
-      
-      if (stop) {
-        goto quit;
-      }
-      
-    }
+  if (times && [times longLongValue] <= 0) {
+    return;
   }
   
-quit:
-  return;
+  long long iteration = 0;
   
+  BOOL stop = NO;
+  
+  while (!times || iteration++ < count) {
+    for (id object in self) {
+      block(object, &stop);
+      
+      if (stop) {
+        return;
+      }
+    }
+  }
 }
 
 - (instancetype)rby_transpose:(NSArray *)array;
