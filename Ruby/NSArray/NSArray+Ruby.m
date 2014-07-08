@@ -252,61 +252,32 @@
   }];
 }
 
-- (void)rby_cycle:(BOOL (^)(id object))block;
+- (void)rby_cycle:(void (^)(id object, BOOL *stop))block;
 {
   [self rby_cycle:nil block:block];
 }
 
-- (void)rby_cycle:(NSNumber *)times block:(BOOL (^)(id object))block;
+- (void)rby_cycle:(NSNumber *)times block:(void (^)(id object, BOOL *stop))block;
 {
-  void (^loopBlock)(BOOL *stop) = ^(BOOL *stop) {
-    
-    for (id object in self) {
-      *stop = block(object);
-      
-      if (*stop) {
-        return;
-      }
-    }
-    
-  };
+  long long count = [times longLongValue];
   
-  __block BOOL stop = NO;
-  
-  if (times) {
-    
-    NSInteger timesInteger = [times integerValue];
-    
-    if (timesInteger < 1) {
-      return;
-    }
-    
-    [times rby_times:^(NSInteger idx) {
-      
-      loopBlock(&stop);
-      
-      if (stop) {
-        return;
-      }
-      
-    }];
-  
-  } else {
-    
-    while (true) {
-      
-      loopBlock(&stop);
-      
-      if (stop) {
-        goto quit;
-      }
-      
-    }
+  if (times && [times longLongValue] <= 0) {
+    return;
   }
   
-quit:
-  return;
+  long long iteration = 0;
   
+  BOOL stop = NO;
+  
+  while (!times || iteration++ < count) {
+    for (id object in self) {
+      block(object, &stop);
+      
+      if (stop) {
+        return;
+      }
+    }
+  }
 }
 
 - (instancetype)rby_transpose:(NSArray *)array;
@@ -327,7 +298,7 @@ quit:
     
     max = max ?: @([object count]);
     
-    if ([object count] != [max integerValue]) {
+    if ([object count] != [max unsignedIntegerValue]) {
       
       NSException *exception =
       [NSException exceptionWithName:NSInternalInconsistencyException
@@ -337,7 +308,7 @@ quit:
       [exception raise];
     }
     
-    [max rby_times:^(NSInteger idx) {
+    [max rby_times:^(NSUInteger idx) {
       NSMutableArray *entry = mutableArray[idx] ?: [@[] mutableCopy];
       [entry addObject:object[idx]];
     }];
@@ -350,6 +321,11 @@ quit:
 - (instancetype)rby_unique;
 {
   return [[NSMutableOrderedSet orderedSetWithArray:self] array];
+}
+
+- (instancetype)rby_rotate;
+{
+  return [self rby_rotate:1];
 }
 
 - (instancetype)rby_rotate:(NSInteger)times;
@@ -375,10 +351,10 @@ quit:
   return [self rby_pop:1];
 }
 
-- (instancetype)rby_pop:(NSInteger)number;
+- (instancetype)rby_pop:(NSUInteger)number;
 {
   if (number >= [self count]) {
-    return @[];
+    return @[ ];
   }
   
   return [self subarrayWithRange:NSMakeRange(0, number)];

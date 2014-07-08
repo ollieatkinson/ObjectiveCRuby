@@ -64,6 +64,7 @@
 		A789BF7218BE9D23008E2704 /* NSNumber+Ruby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+Ruby.m"; path = "NSNumber/NSNumber+Ruby.m"; sourceTree = "<group>"; };
 		A789BF7618BFC451008E2704 /* NSArrayRubySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayRubySpec.m; sourceTree = "<group>"; };
 		A789BF7918BFC484008E2704 /* NSNumberRubySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberRubySpec.m; sourceTree = "<group>"; };
+		A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		F776E328B49348CBAE88B823 /* Pods-RubyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyTests.xcconfig"; path = "Pods/Pods-RubyTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,10 +81,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A74D34ED180F337A00757E9F /* XCTest.framework in Frameworks */,
-				A74D34EF180F337A00757E9F /* UIKit.framework in Frameworks */,
 				A74D34EE180F337A00757E9F /* Foundation.framework in Frameworks */,
 				2093D7F6998445AD82EE9988 /* libPods-RubyTests.a in Frameworks */,
+				A74D34EF180F337A00757E9F /* UIKit.framework in Frameworks */,
+				A74D34ED180F337A00757E9F /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,11 +94,12 @@
 		A74D344C180F1CA300757E9F = {
 			isa = PBXGroup;
 			children = (
-				A74D345A180F1CA300757E9F /* Ruby */,
-				A74D34F0180F337A00757E9F /* RubyTests */,
 				A74D3457180F1CA300757E9F /* Frameworks */,
 				A74D3456180F1CA300757E9F /* Products */,
+				A74D345A180F1CA300757E9F /* Ruby */,
+				A74D34F0180F337A00757E9F /* RubyTests */,
 				F776E328B49348CBAE88B823 /* Pods-RubyTests.xcconfig */,
+				A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				A74D3458180F1CA300757E9F /* Foundation.framework */,
-				A74D3469180F1CA300757E9F /* UIKit.framework */,
 				116C5F843CC74C11A237E4AB /* libPods-RubyTests.a */,
+				A74D3469180F1CA300757E9F /* UIKit.framework */,
 				A74D34EC180F337A00757E9F /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -152,8 +154,8 @@
 		A74D34F1180F337A00757E9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A74D34F2180F337A00757E9F /* RubyTests-Info.plist */,
 				A74D34F3180F337A00757E9F /* InfoPlist.strings */,
+				A74D34F2180F337A00757E9F /* RubyTests-Info.plist */,
 				A74D34F8180F337A00757E9F /* RubyTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -241,7 +243,7 @@
 		A74D344D180F1CA300757E9F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = OliverAtkinson;
 				TargetAttributes = {
 					A74D34EA180F337A00757E9F = {
@@ -316,9 +318,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A789BF7318BE9D23008E2704 /* NSNumber+Ruby.m in Sources */,
 				A789BF6C18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */,
 				A789BF6E18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */,
+				A789BF7318BE9D23008E2704 /* NSNumber+Ruby.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,11 +328,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A789BF6D18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */,
 				A789BF6F18BE9CFB008E2704 /* NSArray+RubyAlias.m in Sources */,
 				A789BF7818BFC451008E2704 /* NSArrayRubySpec.m in Sources */,
 				A789BF7418BE9D23008E2704 /* NSNumber+Ruby.m in Sources */,
 				A789BF7A18BFC484008E2704 /* NSNumberRubySpec.m in Sources */,
-				A789BF6D18BE9CFB008E2704 /* NSArray+Ruby.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,9 +360,9 @@
 /* Begin XCBuildConfiguration section */
 		A74D3476180F1CA300757E9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -396,9 +398,9 @@
 		};
 		A74D3477180F1CA300757E9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -428,6 +430,7 @@
 		};
 		A74D3479180F1CA300757E9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Ruby.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -445,6 +448,7 @@
 		};
 		A74D347A180F1CA300757E9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7A9D55B196C79EC00DD56CD /* Warnings.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Ruby.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -464,7 +468,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F776E328B49348CBAE88B823 /* Pods-RubyTests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -489,7 +492,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F776E328B49348CBAE88B823 /* Pods-RubyTests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

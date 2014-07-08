@@ -33,6 +33,6 @@
 /*
  Execute the block self times
  */
-- (void)rby_times:(void (^)(NSInteger idx))block;
+- (void)rby_times:(void (^)(NSUInteger idx))block;
 
 @end
