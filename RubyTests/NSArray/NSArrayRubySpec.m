@@ -333,7 +333,7 @@ describe(@"NSArray+Ruby#cycle", ^{
     
   });
   
-  it(@"should cycle forever until YES is returned", ^{
+  it(@"should cycle forever until *stop = YES", ^{
     
     __block NSInteger count = 0;
     [array rby_cycle:^(id object, BOOL *stop) {

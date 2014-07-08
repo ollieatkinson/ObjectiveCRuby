@@ -298,7 +298,7 @@
     
     max = max ?: @([object count]);
     
-    if ([object count] != [max integerValue]) {
+    if ([object count] != [max unsignedIntegerValue]) {
       
       NSException *exception =
       [NSException exceptionWithName:NSInternalInconsistencyException
@@ -308,7 +308,7 @@
       [exception raise];
     }
     
-    [max rby_times:^(NSInteger idx) {
+    [max rby_times:^(NSUInteger idx) {
       NSMutableArray *entry = mutableArray[idx] ?: [@[] mutableCopy];
       [entry addObject:object[idx]];
     }];
@@ -321,6 +321,11 @@
 - (instancetype)rby_unique;
 {
   return [[NSMutableOrderedSet orderedSetWithArray:self] array];
+}
+
+- (instancetype)rby_rotate;
+{
+  return [self rby_rotate:1];
 }
 
 - (instancetype)rby_rotate:(NSInteger)times;
@@ -346,10 +351,10 @@
   return [self rby_pop:1];
 }
 
-- (instancetype)rby_pop:(NSInteger)number;
+- (instancetype)rby_pop:(NSUInteger)number;
 {
   if (number >= [self count]) {
-    return @[];
+    return @[ ];
   }
   
   return [self subarrayWithRange:NSMakeRange(0, number)];

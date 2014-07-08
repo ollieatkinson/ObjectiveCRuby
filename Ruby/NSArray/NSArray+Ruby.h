@@ -66,12 +66,14 @@
 
 - (instancetype)rby_unique;
 
+- (instancetype)rby_rotate;
+
 - (instancetype)rby_rotate:(NSInteger)times;
 
 - (instancetype)rby_push:(id)object;
 
 - (instancetype)rby_pop;
 
-- (instancetype)rby_pop:(NSInteger)number;
+- (instancetype)rby_pop:(NSUInteger)number;
 
 @end

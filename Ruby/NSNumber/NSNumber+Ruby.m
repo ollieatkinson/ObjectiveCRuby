@@ -12,7 +12,7 @@
 
 - (instancetype)rby_abs;
 {
-  return @(abs([self doubleValue]));
+  return @(abs([self intValue]));
 }
 
 - (instancetype)rby_ceil;
@@ -30,15 +30,15 @@
   return @0;
 }
 
-- (void)rby_times:(void (^)(NSInteger idx))block;
+- (void)rby_times:(void (^)(NSUInteger idx))block;
 {
-  NSInteger number = [self integerValue];
+  NSUInteger number = [self unsignedIntegerValue];
   
   if (number < 1) {
     return;
   }
   
-  for (NSInteger idx = 0; idx < number; idx++) {
+  for (NSUInteger idx = 0; idx < number; idx++) {
     block(idx);
   }
 }
