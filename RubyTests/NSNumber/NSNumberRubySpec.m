@@ -97,7 +97,7 @@ describe(@"NSNumber+Ruby#times", ^{
   it(@"should iterate 5 times", ^{
     
     __block NSInteger count = 0;
-    [@5 rby_times:^(NSInteger idx) {
+    [@5 rby_times:^(NSUInteger idx) {
       count++;
     }];
     
@@ -108,7 +108,7 @@ describe(@"NSNumber+Ruby#times", ^{
   it(@"should iterate 0 times", ^{
     
     __block NSInteger count = 0;
-    [@0 rby_times:^(NSInteger idx) {
+    [@0 rby_times:^(NSUInteger idx) {
       count++;
     }];
     
@@ -119,7 +119,7 @@ describe(@"NSNumber+Ruby#times", ^{
   it(@"should iterate 0 times", ^{
     
     __block NSInteger count = 0;
-    [@(-1) rby_times:^(NSInteger idx) {
+    [@(-1) rby_times:^(NSUInteger idx) {
       count++;
     }];
     
