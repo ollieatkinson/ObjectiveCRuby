@@ -32,13 +32,15 @@
 
 - (void)rby_times:(void (^)(NSUInteger idx))block;
 {
-  NSUInteger number = [self unsignedIntegerValue];
+  NSInteger number = self.integerValue;
   
   if (number < 1) {
     return;
   }
   
-  for (NSUInteger idx = 0; idx < number; idx++) {
+  NSUInteger count = (NSUInteger)number;
+  
+  for (NSUInteger idx = 0; idx < count; idx++) {
     block(idx);
   }
 }
